@@ -1,0 +1,14 @@
+{% include "header.tpl.html" %}      
+
+<Report>
+{% for k, v in reportMessages.iteritems %}
+	<Application name="{{k}}">
+		{% for item in v %}
+			<Error>
+				<File>{{item.0}} {{item.1}} {{item.2}}</File>
+				<Description>{{item.3}} {{item.4}}</Description>
+			</Error>
+		{% endfor %}
+	</Application>
+{% endfor %}
+</Report>

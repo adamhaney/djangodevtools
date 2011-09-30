@@ -1,0 +1,123 @@
+{% extends "cc_base.tpl.html" %}
+
+{% block body %}
+
+    
+    <table width=100% cellpadding=0 border=0 class="tblHeader">
+        <tr>
+            <th>Date:</th>
+            <td>{{ now|date:"D, d M Y H:i:s" }}</td>
+            <th>Application:</th>
+            <td><a href="summary.html" onclick="syncApp('{{app}}')">{{ app_name }}</a></td>
+        </tr>
+        <tr>
+            <th>Module</th>
+            <td>
+                {% load cc_tags %}
+                {% app_module_name sourceFile %}
+            </td>
+            <th>Cyclomatic Complexity</th>
+
+            <td bgcolor="#adff2f" align="center">
+               <span class="text">{{ reportData.complexity }}</span>
+            </td>
+        </tr>
+        <tr>
+            <th>Source file</th>
+            <td colspan="3">
+                {{ sourceFile }}
+            </td>
+        </tr>
+    </table>
+
+    <br/>
+
+    {% if reportData.classes %}
+
+    <!-- Classes table -->
+    <table width=100% cellpadding=0 border=0 id="tblIndex">
+        <thead>
+        <tr>
+            <th class="heading">Class</th>
+            <th class="heading">Method</th>
+            <th class="heading">Cyclomatic Complexity</th>
+        </tr>
+
+        </thead>
+
+        {% load cc_tags %}
+
+        {% for kc, vc in reportData.classes.iteritems %}
+
+            <tr bgcolor="#87cefa">
+                <td>
+                    {{ kc }}
+                </td>
+                <td></td>
+                <td width="100px" align="center" bgcolor="{% color_by_cc vc.complexity %}">
+                    {{ vc.complexity }}
+                </td>
+            </tr>
+
+            {% for km, vm in vc.methods.iteritems %}
+            <tr class="{% cycle 'rowOdd' 'rowEven' %}">
+                <td></td>
+                <td>
+                   {{ km }}
+                </td>
+                <td width="100px" align="center" bgcolor="{% color_by_cc vm.complexity %}">
+                    {{ vm.complexity }}
+                </td>
+            </tr>
+
+            {% empty %}
+                <td></td>
+                <td>
+                   <span style="font-style:italic;">No methods in class</span>
+                </td>
+                <td></td>
+
+            {% endfor %}
+
+        {% endfor %}
+
+    </table>
+
+    <br/>
+
+    {% endif %}
+
+    <!-- Functions table -->
+
+    {% if reportData.functions %}
+
+    <table width=100% cellpadding=0 border=0 id="tblIndex">
+        <thead>
+        <tr>
+            <th class="heading">Function</th>
+            <th class="heading">Cyclomatic Complexity</th>
+        </tr>
+
+        </thead>
+
+        {% load cc_tags %}
+
+        {% for kf, vf in reportData.functions.iteritems %}
+
+            <tr class="rowOdd">
+                <td>
+                    {{ kf }}
+                </td>
+                <td></td>
+                <td width="100px" align="center" bgcolor="{% color_by_cc vf.complexity %}">
+                    {{ vf.complexity }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% endif %}
+
+{% endblock %}

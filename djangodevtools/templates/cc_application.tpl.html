@@ -1,0 +1,44 @@
+{% extends "cc_base.tpl.html" %}
+
+{% block body %}
+
+    <table width=100% cellpadding=0 border=0 id="tblIndex">
+        <thead>
+        <tr>
+            <!--
+           <a class="dfn" href="help.html" onclick="window.location.href = "dati_corretto.html"; return false;">
+            -->
+            <th class="heading">Module</th>
+            <th class="heading">Cyclomatic Complexity</th>
+        </tr>
+
+        </thead>
+
+        {% load cc_tags %}
+
+        {% for k, v in reportData.iteritems %}
+
+            <tr class="{% cycle 'rowOdd' 'rowEven' %}" onclick="window.location.href='../{{app}}/{% app_module_name k %}.html';">
+                <td id="id_sum_{{mod}}"
+                    onmouseout="out('id_sum_{{mod}}')"
+                    onclick="window.location.href='./{{ k }}.html';">
+
+                    {% app_module_name k %}
+
+                </td>
+                <td width="100px" align="center" bgcolor="{% color_by_cc v.complexity %}">
+                    {{ v.complexity }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <script type="text/javascript">
+        var ttable = document.getElementById("tblIndex");
+        var packageTable = new SortableTable(ttable, ["String", "Cyclomatic Complexity"]);
+        //packageTable.sort(1);
+    </script>
+
+{% endblock %}

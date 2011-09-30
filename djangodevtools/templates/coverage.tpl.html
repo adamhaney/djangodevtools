@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"   "http://www.w3.org/TR/html4/strict.dtd">
+<HTML>
+<head>
+{% block head %}
+
+{% block css %}
+<style>
+
+
+.hidden {
+    display: none;
+}
+
+a.dfn {
+    border-bottom: 1px dotted #00aa00;
+    cursor: help;
+}
+
+a.dfn:active, a.dfn:link, a.dfn:visited {
+    color: #000000;
+    text-decoration: none;
+}
+
+a.dfn:hover {
+    color: #0000ff;
+    text-decoration: none;
+}
+
+body {
+    font-family: verdana, arial, helvetica;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.5em;
+}
+
+h5 {
+    margin-top: 0.5em;
+}
+
+div.footer {
+    font-size: 68%;
+    margin-top: 1.5em;
+}
+
+div.percentgraph
+{
+    background-color: #f02020;
+    border: #808080 1px solid;
+    height: 1.3em;
+    margin: 0px;
+    padding: 0px;
+    width: 100px;
+}
+
+div.percentgraph div.greenbar
+{
+    background-color: #00f000;
+    height: 1.3em;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.percentgraph div.na
+{
+    background-color: #eaeaea;
+    height: 1.3em;
+    margin: 0px;
+    padding: 0px;
+}
+
+div.percentgraph span.text
+{
+    display: block;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+}
+
+div.separator {
+    height: 10px;
+}
+
+table tr td, table tr th {
+    font-size: 80%;
+}
+
+td.value table tr td {
+    font-size: 11px;
+}
+
+
+table.report {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.report td {
+    border: #d0d0d0 1px solid;
+}
+
+table.report td.heading {
+    background: #dcecff;
+    font-weight: bold;
+    text-align: center;
+}
+
+table.report td.heading:hover {
+    background: #c0ffc0;
+    cursor: pointer;
+}
+
+table.report td.value {
+    text-align: right;
+}
+
+
+table.tblHeader{border-collapse:collapse;}
+.tblHeader TD,.tblHeader TH {border: 1px solid black; padding:2px;padding-left:10px;}
+.tblHeader TH { text-align:left; width:5cm; padding-left:10px }
+
+TR.rowOdd{background-color:white; cursor: pointer;}
+TR.rowEven{background-color:#EDF3FE; cursor: pointer;}
+TR.rowOdd:hover{background-color: #FFFFCC; cursor: pointer;}
+TR.rowEven:hover{background-color: #FFFFCC; cursor: pointer;}
+
+.tblCoverage TD{ border: 0px solid black; padding-right:10px}
+.tblIndex {border-collapse:collapse; border: 0px solid black;}
+
+#modulesList td {
+    cursor: pointer;
+    font-size:80%;
+    background-color: white;
+}
+#modulesList td:hover {    
+    font-size:80%;
+    background-color: #FFFFCC;
+}
+
+</style>
+{% block extra_css %}
+{% endblock extra_css %}
+{% endblock css %}
+
+{% block js %}
+<script>
+selectedEl = null
+overColor = '#FFFFCC'
+selectedColor = '#FF9933'
+
+function mark(id){  
+    obj = document.getElementById(id)
+    if (selectedEl != null) {
+        selectedEl.style.backgroundColor=''    
+    }
+    obj.style.backgroundColor= selectedColor
+    selectedEl = obj
+}
+
+
+function out(id){  
+    obj = document.getElementById(id)
+    if (obj == selectedEl){
+        obj.style.backgroundColor= selectedColor
+    }else{
+        obj.style.backgroundColor=''
+    }
+}
+
+function showModule(app, module){
+
+}
+
+function selectApplication(app){
+  parent.modules.location.href=app+'/modules.html';
+  parent.summary.location.href=app+'/summary.html';
+  parent.header.location.href=app+'/header.html';
+}
+
+function syncApp(app){
+     /* parent.modules.location.href= 'modules_'+ app +'.html' */
+     /*parent.summary.location.href= 'summary_'+ app +'.html'*/     
+     parent.summary.location.href='../{{app}}/summary.html'; 
+}
+</script>
+{% block extra_js %}
+{% endblock extra_js %}
+
+{% endblock js %}
+
+{% endblock head %}
+<title>{% block title %}{{ title }}{% endblock title %}</title>
+</head>
+<BODY>
+{% block body %}
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% endblock body %}
+</BODY>
+</HTML>

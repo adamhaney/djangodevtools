@@ -1,0 +1,23 @@
+
+{% if co %}
+    <td style="width:100px;text-align:right;">{{ co|floatformat:2 }}%</td>
+    <td style="width:30px;text-align:right;">{{ el }}</td>
+	<td width="100px">
+	<div class="percentgraph">
+	    <div class="greenbar" style="width:{{ co|floatformat:0 }}px">
+	        <span class="text">{{ cl }}/{{ tl }}</span>
+	    </div>
+	</div>
+	</td>
+{% else %}
+    <td style="width:100px">N/A</td>
+    <td>N/A</td>
+    <td width="100px">
+        <div class="percentgraph">
+            <div class="na" style="width: 100px;">
+            <span class="text">N/A</span>
+        </div>
+    </div>
+    </td>
+{% endif %}
+

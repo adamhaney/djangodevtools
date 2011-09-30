@@ -1,0 +1,21 @@
+{% extends "coverage.tpl.html" %}
+
+{% block content %}
+
+<table id="modulesList" width="100%">
+<tr><th id="id_{{app}}"
+             onmouseout="out('id_{{app}}')" 
+             onclick="mark('id_{{app}}'); parent.summary.location.href='../{{app_name}}/summary.html';"
+             >
+    {{ app_name }}
+     </th></tr>
+{% for co, mod, tl, cl, el, app in modules %}
+     <tr><td id="id_{{app}}_{{mod}}"              
+             onclick="mark('id_{{app}}_{{mod}}'); parent.summary.location.href='../{{app}}/{{mod}}.html';"
+             >
+    {{ mod }}
+     </td></tr>
+        
+{%endfor %}
+</table>
+{% endblock content %}

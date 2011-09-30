@@ -1,0 +1,22 @@
+{% extends "cc_base.tpl.html" %}
+
+{% block modules_menu %}
+
+    <table id="modulesList" width="100%">
+        <tr>
+            <th id="id_{{app}}" onmouseout="out('id_{{app}}')" onclick="mark('id_{{app}}'); parent.summary.location.href='../{{app_name}}/summary.html';">
+                {{ app_name }}
+            </th>
+        </tr>
+
+        {% load cc_tags %}
+
+        {% for x in modules %}
+            <tr>
+                <td id="id_{{app}}_{{mod}}" onclick="mark('id_{{app}}_{{mod}}'); parent.summary.location.href='../{{app}}/{% app_module_name x %}.html';">
+                    {% app_module_name x %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock modules_menu %}

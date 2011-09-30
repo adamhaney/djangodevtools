@@ -1,0 +1,24 @@
+{% extends "coverage.tpl.html" %}
+
+{% block content %}
+<table id="modulesList" width="100%">
+<!-- 
+    <tr><td id="id_all"
+             onmouseout="out('id_all')" 
+             onclick="mark('id_all'); selectApplication('all');"
+             >
+    All
+     </td></tr>
+ -->
+
+{% for app in datadict %}      
+    <tr><td id="id_{{app}}"
+             onmouseout="out('id_{{app}}')" 
+             onclick="mark('id_{{app}}'); selectApplication('{{app}}');"
+             >
+    {{ app }}
+     </td></tr>
+        
+{% endfor %}
+</table>    
+{% endblock content %}

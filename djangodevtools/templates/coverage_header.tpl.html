@@ -1,0 +1,19 @@
+{% extends "coverage.tpl.html" %}
+
+{% block header %}
+<table width=100% cellpadding=0 border=0 class="tblHeader">
+  <tr>
+    <th>Date:</th>
+    <td>{{ now|date:"D, d M Y H:i:s" }}</td>
+    <td>{{ app_name }}</td>
+    {% include "bar.tpl.html" %}
+  </tr>
+  <tr>
+    <th>Cmdline:</th>
+    <td colspan=5>
+	  {% for arg in cmdline_args %}<b>{{ arg }}</b> {% endfor %}<br>
+	  {% for n,v in cmdline_kwargs.items %}<b>--{{ n }}</b>={{ v }} {% endfor %}
+    </td>
+  </tr> 
+</table>    
+{% endblock header %}

@@ -1,0 +1,57 @@
+{% extends "coverage.tpl.html" %}
+
+{% block js %}
+{{ block.super }}
+<script type="text/javascript">
+{% include "sortabletable.js" %}
+</script>
+{% endblock js %}
+
+{% comment %}
+
+<table width=100% cellpadding=0 border=0 class="tblHeader">
+  <tr><th>Date:</th><td colspan="2">{{ now|date:"D, d M Y H:i:s" }}</td></tr>
+  <tr><th>Cmdline:</th><td colspan="3">
+  {% for arg in cmdline_args %}<b>{{ arg }}</b> {% endfor %}<br>
+  {% for n,v in cmdline_kwargs.items %}<b>--{{ n }}</b>={{ v }} {% endfor %}
+  </td></tr>
+  <tr><th>Coverage Overall</th>{% include "bar.tpl.html" %}</tr>
+</table>	
+{% endcomment %}
+
+<br><br>
+{% block content %}
+<table width=100% cellpadding=0 border=0 id="tblIndex">
+<thead>
+  <tr>
+<!--  
+<a class="dfn" href="help.html" onclick="window.location.href = "dati_corretto.html"; return false;">
+ -->
+    <th class="heading">Module</th>
+    <th class="heading" style='width:2cm'>Coverage</th>
+    <th class="heading">Skipped</th>
+    <th class="heading">Lines</th>
+  </tr>
+
+</thead>
+
+{% for co, mod, tl, cl, el, app in modules %}
+    <tr class="{% cycle 'rowOdd' 'rowEven' %}" onclick="window.location.href='../{{app}}/{{ mod }}.html';">
+        <td id="id_sum_{{mod}}"             
+             onmouseout="out('id_sum_{{mod}}')"
+             onclick="window.location.href='../{{app}}/{{ mod }}.html';"
+             >{{ mod }}
+        </td>
+        {% include "bar.tpl.html" %}
+    </tr>
+
+{%endfor %}
+</table>
+<script type="text/javascript">
+	var ttable = document.getElementById("tblIndex");
+	var packageTable = new SortableTable(ttable, ["String", "Percentage", "Number", "Bars"]);
+	//packageTable.sort(1);
+</script>
+
+
+{% endblock content %}
