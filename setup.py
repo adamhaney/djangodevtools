@@ -87,7 +87,7 @@ setup(
         'distribute',
         'coverage>=3.4',
         'pygments>=1.3.1',
-        'pyflakes==0.4.0',
+        'pyflakes==0.5.0',
         'epydoc>=3.0.1',
         'ipython',
         'configobj>=4.7.2',
